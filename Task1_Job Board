@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Job Board</h1>
+    <form id="job-form">
+      <label for="job-title">Job Title:</label>
+      <input type="text" id="job-title" required>
+      <label for="job-description">Job Description:</label>
+      <textarea id="job-description" required></textarea>
+      <button type="submit">Post Job</button>
+    </form>
+    <div id="job-list"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+h1 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.job-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+document.addEventListener('DOMContentLoaded', function () {
+  const jobForm = document.getElementById('job-form');
+  const jobList = document.getElementById('job-list');
+
+  jobForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const jobTitle = document.getElementById('job-title').value;
+    const jobDescription = document.getElementById('job-description').value;
+
+    if (jobTitle.trim() === '' || jobDescription.trim() === '') {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    const jobItem = document.createElement('div');
+    jobItem.classList.add('job-item');
+    jobItem.innerHTML = `
+      <h3>${jobTitle}</h3>
+      <p>${jobDescription}</p>
+    `;
+
+    jobList.appendChild(jobItem);
+
+    jobForm.reset();
+  });
+});
